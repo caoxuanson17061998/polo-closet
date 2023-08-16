@@ -1,0 +1,67 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.banner {
+  position: relative;
+  height: 160px;
+  width: 100%;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    font-size: 36px;
+    line-height: 44px;
+    font-weight: 500;
+    position: absolute;
+    left: 10%;
+    top: 16px;
+
+    div {
+      & > span {
+        color: rgba(237, 28, 36, 1);
+      }
+    }
+
+    .time {
+      color: rgba(237, 28, 36, 1);
+    }
+  }
+
+  .date {
+    color: rgba(130, 130, 130, 1);
+    font-size: 18px;
+  }
+}
+
+.total-revenue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  height: 260px;
+  border-radius: 16px;
+  border: 1px solid var(--stroke-1, #e0e0e0);
+
+  span {
+    font-size: 18px;
+  }
+}
+
+:host ::ng-deep .range-calendar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.p-calendar {
+}

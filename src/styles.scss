@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+@import './assets/scss/reset.scss';
+
+body {
+  font-family: 'Lato';
+  margin: 0px;
+  position: relative;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  outline: none;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.fsel-info-notification-overlay,
+.fsel-success-notification-overlay,
+.fsel-warning-notification-overlay,
+.fsel-error-notification-overlay {
+  z-index: 9999999 !important;
+}
+
+.cdk-overlay-container {
+  position: absolute;
+  z-index: 10000;
+  right: 0;
+  bottom: 0;
+}

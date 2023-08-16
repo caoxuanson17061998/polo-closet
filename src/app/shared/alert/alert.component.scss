@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 16px;
+  width: 395px;
+  height: 40px;
+  border-radius: 10px;
+  color: white;
+
+  &.background-green {
+    background-color: #4caf50;
+  }
+
+  &.background-red {
+    background-color: #ca3b40;
+  }
+
+  &.background-blue {
+    background-color: #1890ff;
+  }
+
+  &.background-yellow {
+    background-color: #ffab00;
+  }
+
+  span {
+    margin-left: 12px;
+    font-family: 'Helvetica Neue Bold';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    color: #ffffff;
+  }
+}
+
+:host ::ng-deep .mat-snack-bar-container {
+  background: none;
+  box-shadow: none;
+}

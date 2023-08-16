@@ -1,0 +1,68 @@
+<div class="search">
+  <input
+    type="text"
+    placeholder="Search ..."
+    (keyup.enter)="onSearch($event)" />
+  <i class="pi pi-search"></i>
+</div>
+
+<p-table [value]="usersByCondition" class="table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>STT</th>
+      <th>Tên đăng nhập</th>
+      <th>Tên</th>
+      <th>Số điện thoại</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user let-rowIndex="rowIndex">
+    <tr>
+      <td>
+        {{
+          ((currentPage - 1) * rowsPerPage + rowIndex + 1)
+            .toString()
+            .padStart(2, '0')
+        }}
+      </td>
+      <td>{{ user?.username }}</td>
+      <td>{{ user?.fullname }}</td>
+      <td>{{ user?.numberphone }}</td>
+      <td>{{ user?.email }}</td>
+      <td>
+        <button class="button-action">
+          <i
+            class="pi pi-minus-circle"
+            (click)="onChangeStatus(user)"
+            [style]="{
+              color: [Status.Pending, Status.Locked].includes(user.status)
+                ? 'red'
+                : '#000'
+            }"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div class="pagination">
+  <span>Tổng số người dùng: {{ totalUsers }}</span>
+  <div>
+    <p-dropdown
+      [options]="[5, 10, 15]"
+      (onChange)="changeRowsPerPage($event)"
+      class="dropdown"></p-dropdown>
+    <span
+      >Sản phẩm từ {{ startOrder }} đến {{ startOrder + rowsPerPage - 1 }}</span
+    >
+    <button (click)="onChangePage('previous')" [disabled]="currentPage === 1">
+      <i class="pi pi-angle-left"></i>
+    </button>
+    <button
+      (click)="onChangePage('next')"
+      [disabled]="currentPage === lastPage">
+      <i class="pi pi-angle-right"></i>
+    </button>
+  </div>
+</div>

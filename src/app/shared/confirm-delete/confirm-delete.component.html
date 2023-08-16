@@ -1,0 +1,23 @@
+<div class="dialog">
+  <div mat-dialog-content class="dialog-content">
+    <img
+      #dialogIcon
+      src="../../../../assets/icons/dialogs/Alert-Triangle.svg"
+      alt="icon" />
+    <p>{{ data.message }}</p>
+  </div>
+  <div class="button-group">
+    <button
+      mat-icon-button
+      class="dialog-action dialog-action--border"
+      (click)="handleKeep()">
+      Keep
+    </button>
+    <button
+      mat-icon-button
+      class="dialog-action dialog-action--fill"
+      (click)="handleDelete()">
+      Delete
+    </button>
+  </div>
+</div>

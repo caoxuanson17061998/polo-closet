@@ -1,0 +1,185 @@
+.wrapper {
+  width: 232px;
+  height: 100%;
+  position: relative;
+  border-right: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+.logo-with-text {
+  // position: absolute;
+  padding: 0 10px;
+  top: 0;
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+  }
+  display: flex;
+}
+
+:host ::ng-deep .menu {
+  .p-menu {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 0;
+  }
+
+  .p-submenu-header {
+    color: #828282;
+    font-weight: 700;
+    font-size: 14px;
+    padding-left: 16px;
+  }
+
+  .p-menuitem-link {
+    padding: 0;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 56px;
+
+    &:hover {
+      background: rgba(237, 28, 36, 0.05);
+    }
+  }
+
+  .p-menuitem-link-active {
+    background: rgba(237, 28, 36, 0.05);
+  }
+
+  .p-menuitem-icon {
+    margin: 0;
+    width: 32;
+  }
+
+  .p-menu .p-menuitem-link .p-menuitem-text {
+    color: #4f4f4f;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 140%;
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .user {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    color: rgba(79, 79, 79, 1);
+    height: 56px;
+    padding-left: 16px;
+
+    img {
+      height: 32px;
+      width: 32px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  button {
+    background: rgba(79, 79, 79, 0.05);
+    height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+:host ::ng-deep {
+  .banner-icon {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../../assets/images/banner-management.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: move;
+    }
+  }
+
+  .discount-icon {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../../assets/images/discount-code.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: move;
+    }
+  }
+
+  .product-management-icon {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../../assets/images/product-management.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: move;
+    }
+  }
+
+  .user-management-icon {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../../assets/images/user-management.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: move;
+    }
+  }
+
+  .statistic-icon {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../../assets/images/statistic.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: move;
+    }
+  }
+}

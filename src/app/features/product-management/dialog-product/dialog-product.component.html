@@ -1,0 +1,85 @@
+{{ form.value | json }}
+<div class="wrapper" [formGroup]="form">
+  <div class="field">
+    <label for="name">Tên:</label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+  <div class="field">
+    <label for="description">Mô tả:</label>
+    <input type="text" id="description" formControlName="description" />
+  </div>
+  <div class="wrapper-field">
+    <div class="field" style="flex: 2">
+      <label for="color">Màu:</label>
+      <input type="text" id="color" formControlName="color" />
+    </div>
+    <div class="field" style="flex: 1">
+      <label for="quantity">Số lượng:</label>
+      <input type="number" id="quantity" formControlName="quantity" />
+    </div>
+  </div>
+  <div class="field">
+    <label for="price">Giá:</label>
+    <div class="p-inputgroup">
+      <input
+        type="number"
+        id="price"
+        formControlName="price"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+      <span class="p-inputgroup-addon">VNĐ</span>
+    </div>
+  </div>
+  <div class="field">
+    <label for="size">Size:</label>
+    <!-- <input type="text" id="size" /> -->
+    <p-multiSelect
+      [options]="sizes"
+      formControlName="size"
+      optionLabel="name"
+      optionValue="value"
+      display="chip"></p-multiSelect>
+  </div>
+  <div class="field">
+    <label for="banner">Banner:</label>
+    <!-- <input type="text" id="banner" formControlName="banner" /> -->
+    <input type="text" id="banner" />
+    <!-- <div class="upload-area">
+      <div class="file-item" (click)="controlFile.click()">
+        <span class="cursor-pointer">Add file</span>
+        <input
+          type="file"
+          #controlFile
+          class="d-none"
+          (change)="onChooseFile($event)" />
+      </div>
+    </div>
+    <div class="file-list" *ngFor="let filePath of filePaths">
+      <div class="file-item">
+        <div class="file-item-icon">
+          <img src="./assets/images/icons/files/pdf.png" />
+        </div>
+        <div
+          class="file-item-name mr-2"
+          pTooltip="{{ filePath | getFileName }}"
+          tooltipPosition="top">
+          {{ filePath | getFileName }}
+        </div>
+        <a class="file-item-action" [href]="filePath" target="_blank">
+          <img
+            src="../../../../../../../assets/icons/actions/eye.svg"
+            alt="eye" />
+        </a>
+        <span class="file-item-action" (click)="onRemoveFile(filePath)">
+          <img
+            src="../../../../../../../assets/icons/actions/close.svg"
+            alt="close" />
+        </span>
+      </div>
+    </div> -->
+  </div>
+  <div class="field">
+    <label for="picture">Ảnh:</label>
+    <!-- <input type="text" id="picture" formControlName="pictures" /> -->
+    <input type="text" id="picture" />
+  </div>
+</div>

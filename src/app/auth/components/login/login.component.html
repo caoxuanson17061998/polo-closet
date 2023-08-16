@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="logo-with-text"><img src="../../../../assets/images/logo-with-text.svg" alt="logo" ></div>
+  <div class="form" [formGroup]="form">
+    <p class="title">Đăng nhập</p>
+    <p class="sub-title">Chào mừng bạn đến với Polo Closet</p>
+    <div class="field-list">
+      <div class="field-item">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="username"  >
+      </div>
+      <div class="field-item">
+       
+          <label for="password">Mật khẩu</label>
+          <!-- <input type="text" id="password" > -->
+          <p-password formControlName="password" inputId="password" [toggleMask]="true" [feedback]="false" class="password"></p-password>
+        
+  
+        </div>
+        <button class="login-button" (click)="onLogin()">ĐĂNG NHẬP</button>
+  </div>
+</div>
+<div class="footer">
+  <span>Phát triển bởi</span>
+  <img src="../../../../assets/images/logo.svg" alt="logo">
+</div>

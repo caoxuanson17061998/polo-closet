@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="logo-with-text">
+    <div>
+      <img
+        src="../../../assets/images/logo-with-text.svg"
+        alt="logo-with-text" />
+    </div>
+  </div>
+  <p-menu [model]="items" class="menu"></p-menu>
+
+  <div class="footer">
+    <div class="user">
+      <img
+        src="../../../assets/images/Cao-Xuan-Son-removebg-preview.png"
+        alt="avatar"
+        class="avatar" />
+      Nguyen Hai Banh
+    </div>
+    <button (click)="onLogout()">
+      Đăng xuất
+      <i class="pi pi-sign-out"></i>
+    </button>
+  </div>
+</div>

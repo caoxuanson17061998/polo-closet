@@ -1,0 +1,46 @@
+.dialog {
+  background-color: #fcfcfc;
+  border-radius: 20px;
+}
+
+.dialog-content {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+
+  p {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: #333333;
+    margin-left: 8px;
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.dialog-action {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 14px 26px;
+
+  &.dialog-action--border {
+    background: #fcfcfc;
+    border: 1px solid #c4c4c4;
+    color: #333333;
+  }
+
+  &.dialog-action--fill {
+    background: #ca3b40;
+    color: #ffffff;
+  }
+}

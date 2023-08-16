@@ -1,0 +1,22 @@
+<div
+  class="wrapper"
+  [class]="{
+    'background-green': data.type === 'success',
+    'background-red': data.type === 'error',
+    'background-blue': data.type === 'info',
+    'background-yellow': data.type === 'warn'
+  }">
+  <img
+    *ngIf="data.type === 'success'"
+    src="../../../assets/images/success-icon-alert.svg"
+    alt="success-icon" />
+  <img
+    *ngIf="data.type === 'error'"
+    src="../../../assets/images/error-icon-alert.svg"
+    alt="alert-icon" />
+  <img
+    *ngIf="data.type === 'info'"
+    src="../../../assets/images/info-icon-alert.svg"
+    alt="info-icon" />
+  <span>{{ data.message }}</span>
+</div>
