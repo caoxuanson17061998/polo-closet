@@ -1,1 +1,44 @@
-<p>banner-management works!</p>
+<div class="wrapper">
+  <div class="preview">
+    <img id="img-preview" [src]="banner.link1" />
+
+    <label for="file-input">Upload</label>
+    <input
+      accept="image/*"
+      type="file"
+      id="file-input"
+      (change)="onChangeImage($event, 'link1')" />
+  </div>
+  <div class="preview">
+    <img id="img-preview" [src]="banner.link2" />
+
+    <label for="file-input">Upload</label>
+    <input
+      accept="image/*"
+      type="file"
+      id="file-input"
+      (change)="onChangeImage($event, 'link2')" />
+  </div>
+  <div class="preview">
+    <img id="img-preview" [src]="banner.link3" />
+
+    <label for="file-input">Upload</label>
+    <input
+      accept="image/*"
+      type="file"
+      id="file-input"
+      (change)="onChangeImage($event, 'link3')" />
+  </div>
+  <div class="preview">
+    <img id="img-preview" [src]="banner.link4" />
+
+    <label for="file-input">Upload</label>
+    <input
+      accept="image/*"
+      type="file"
+      id="file-input"
+      (change)="onChangeImage($event, 'link4')" />
+  </div>
+</div>
+
+<button (click)="onSave()" class="save-button">Lưu banner</button>

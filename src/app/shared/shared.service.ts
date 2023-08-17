@@ -15,6 +15,7 @@ export class SharedService {
   private PRODUCT_URL = `${this.API_URL}/product`;
   private PROMOTION_URL = `${this.API_URL}/promotion`;
   private USERS_URL = `${this.API_URL}/users`;
+  private BANNER_URL = `${this.API_URL}/banner`;
 
   private isLoginSub$ = new BehaviorSubject(false);
   isLogin$ = this.isLoginSub$.asObservable();
@@ -136,5 +137,31 @@ export class SharedService {
           return EMPTY;
         })
       );
+  }
+
+  getBanners(): Observable<any> {
+    return this.httpClient.get<any>(`${this.BANNER_URL}/get`).pipe(
+      map(res => {
+        this.spinner.hide();
+        return res;
+      }),
+      catchError(() => {
+        this.spinner.hide();
+        return EMPTY;
+      })
+    );
+  }
+
+  updateBanner(payload: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.BANNER_URL}/update`, payload).pipe(
+      map(res => {
+        this.spinner.hide();
+        return res;
+      }),
+      catchError(() => {
+        this.spinner.hide();
+        return EMPTY;
+      })
+    );
   }
 }
