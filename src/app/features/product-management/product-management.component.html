@@ -6,7 +6,7 @@
       (keyup.enter)="onSearch($event)" />
     <i class="pi pi-search"></i>
   </div>
-  <button (click)="onAddProduct()" class="add-product">
+  <button (click)="isShowDialog = true" class="add-product">
     <i class="pi pi-plus"></i>
     Thêm sản phẩm
   </button>
@@ -18,7 +18,7 @@
       <th>STT</th>
       <th>Ảnh</th>
       <th>Tên</th>
-      <th>Mô tả</th>
+      <th style="flex: 3">Mô tả</th>
       <th>Giá bán</th>
       <th>Số lượng đã bán</th>
       <th>Màu sắc</th>
@@ -36,14 +36,18 @@
         }}
       </td>
       <td>
-        <!-- <img
-          [src]="product?.link_avt"
-          [alt]="product?.name"
-          style="width: 100%; object-fit: cover" /> -->
+        <div>
+          <img
+            [src]="product?.link_avt"
+            [alt]="product?.name"
+            style="width: 100%; object-fit: cover" />
+        </div>
       </td>
-      <td>{{ product?.name }}</td>
-      <td>{{ product?.description }}</td>
-      <td>{{ product?.price }}</td>
+      <td>
+        {{ product?.name }}
+      </td>
+      <td style="flex: 3">{{ product?.description }}</td>
+      <td>{{ product?.price | currency : 'VND' }}</td>
       <td>{{ product?.soldCount }}</td>
       <td>{{ product?.color }}</td>
       <td>{{ product?.size?.join(', ') }}</td>
@@ -58,8 +62,8 @@
           <button class="button-action" (click)="onEditProduct(product)">
             <i class="pi pi-file-edit"></i>
           </button>
-          <button class="button-action">
-            <i class="pi pi-trash" (click)="onDeleteProduct(product)"></i>
+          <button class="button-action" (click)="onShowDeleteDialog(product)">
+            <i class="pi pi-trash"></i>
           </button>
         </div>
       </td>
@@ -93,20 +97,61 @@
   [draggable]="false"
   [resizable]="false"
   position="right"
-  [style]="{ width: '28vw' }"
+  [style]="{ width: '32vw' }"
   [modal]="true"
   (onHide)="onCloseDialog()"
   class="fsel-dialog">
-  <ng-template pTemplate="header"> Thêm sản phẩm </ng-template>
+  <ng-template pTemplate="header">
+    <span *ngIf="!selectedProduct">Thêm sản phẩm</span>
+    <span *ngIf="selectedProduct">Cập nhật sản phẩm</span>
+  </ng-template>
   <app-dialog-product
     *ngIf="isShowDialog"
     [selectedProduct]="selectedProduct"></app-dialog-product>
   <ng-template pTemplate="footer">
     <div class="button-list">
       <button class="button button-cancel" (click)="onCloseDialog()">
-        HỦY
+        Hủy
       </button>
-      <button class="button button-add" (click)="addProduct()">THÊM</button>
+      <button
+        *ngIf="!selectedProduct"
+        class="button button-add"
+        (click)="onAddProduct()">
+        Thêm
+      </button>
+      <button
+        *ngIf="selectedProduct"
+        class="button button-add"
+        (click)="onSaveProduct()">
+        Lưu
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="isShowDeleteDialog"
+  [draggable]="false"
+  [resizable]="false"
+  position="center"
+  [style]="{ width: '28vw', height: 'auto' }"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  class="fsel-dialog">
+  <div *ngIf="selectedProduct" style="line-height: 1.4rem">
+    Bạn có muốn xóa sản phẩm {{ selectedProduct.name }} ?
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="button-list">
+      <button class="button button-cancel" (click)="onCloseDialog()">
+        Hủy
+      </button>
+      <button
+        class="button button-add"
+        style="background-color: red"
+        (click)="onDeleteProduct()">
+        Xóa
+      </button>
     </div>
   </ng-template>
 </p-dialog>

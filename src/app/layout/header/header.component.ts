@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit {
           case '/statistic':
             this.title = 'Thống kê';
             break;
+          case '/order-management':
+            this.title = 'Quản lý đơn hàng';
+            break;
           case '/product-management':
             this.title = 'Quản lý sản phẩm';
             break;
@@ -43,6 +46,9 @@ export class HeaderComponent implements OnInit {
         break;
       case '/product-management':
         this.title = 'Quản lý sản phẩm';
+        break;
+      case '/order-management':
+        this.title = 'Quản lý đơn hàng';
         break;
       case '/discount-code':
         this.title = 'Mã giảm giá';

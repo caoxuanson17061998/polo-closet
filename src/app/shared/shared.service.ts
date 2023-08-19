@@ -1,3 +1,4 @@
+import { Status as StatusOrder } from './../features/order-management/order-management.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -16,6 +17,7 @@ export class SharedService {
   private PROMOTION_URL = `${this.API_URL}/promotion`;
   private USERS_URL = `${this.API_URL}/users`;
   private BANNER_URL = `${this.API_URL}/banner`;
+  private ORDER_URL = `${this.API_URL}/order`;
 
   private isLoginSub$ = new BehaviorSubject(false);
   isLogin$ = this.isLoginSub$.asObservable();
@@ -66,7 +68,7 @@ export class SharedService {
       );
   }
 
-  updateProduct(id: string, payload: ICreateProduct): Observable<any> {
+  updateProduct(id: string, payload: any): Observable<any> {
     return this.httpClient
       .put<any>(`${this.PRODUCT_URL}/update/${id}`, payload)
       .pipe(
@@ -163,5 +165,36 @@ export class SharedService {
         return EMPTY;
       })
     );
+  }
+
+  getOrders(): Observable<any> {
+    return this.httpClient.get<any>(`${this.ORDER_URL}/getall`).pipe(
+      map(res => {
+        this.spinner.hide();
+        return res;
+      }),
+      catchError(() => {
+        this.spinner.hide();
+        return EMPTY;
+      })
+    );
+  }
+
+  updateStatusOrder(
+    id: string,
+    payload: { status: StatusOrder }
+  ): Observable<any> {
+    return this.httpClient
+      .put<any>(`${this.ORDER_URL}/update-status/${id}`, payload)
+      .pipe(
+        map(res => {
+          this.spinner.hide();
+          return res;
+        }),
+        catchError(() => {
+          this.spinner.hide();
+          return EMPTY;
+        })
+      );
   }
 }

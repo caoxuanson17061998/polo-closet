@@ -28,7 +28,7 @@
       </td>
       <td>{{ user?.username }}</td>
       <td>{{ user?.fullname }}</td>
-      <td>{{ user?.numberphone }}</td>
+      <td>{{ user?.numberphone | phoneFormat }}</td>
       <td>{{ user?.email }}</td>
       <td>
         <button class="button-action">

@@ -32,16 +32,6 @@ export class DiscountCodeComponent implements OnInit {
   ngOnInit(): void {}
 
   onCancel() {
-    // this.form = {
-    //   title: null,
-    //   content: null,
-    //   startTime: null,
-    //   endTime: null,
-    //   type: null,
-    //   value: null,
-    //   condition: null,
-    // };
-
     this.form.patchValue({
       title: null,
       content: null,
@@ -55,14 +45,24 @@ export class DiscountCodeComponent implements OnInit {
 
   onAdd() {
     const { invalid, value } = this.form;
+
     if (invalid) {
-      this.notificationService.error('Form tạo không hợp lệ', 10000000);
+      this.notificationService.error('Form tạo không hợp lệ');
       return;
     }
+
+    if (value.startDate && value.endDate) {
+      const startDate = new Date(value.startDate).getTime();
+      const endDate = new Date(value.endDate).getTime();
+      if (startDate > endDate) {
+        this.notificationService.error(
+          'Thời gian bắt đầu phải bé hơn thời kết thúc'
+        );
+        return;
+      }
+    }
+
     this.spinner.show();
-    // const payload = {
-    //   title: value.title,
-    //   startDate: new Date(value.startTime).toISOString(),
     this.shardService.createPromotion(value).subscribe({
       next: res => {
         this.notificationService.success(res.message);

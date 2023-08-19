@@ -8,6 +8,7 @@ import { ProductManagementComponent } from './features/product-management/produc
 import { DiscountCodeComponent } from './features/discount-code/discount-code.component';
 import { UserComponent } from './features/user/user.component';
 import { BannerManagementComponent } from './features/banner-management/banner-management.component';
+import { OrderManagementComponent } from './features/order-management/order-management.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'product-management',
         component: ProductManagementComponent,
+      },
+      {
+        path: 'order-management',
+        component: OrderManagementComponent,
       },
       {
         path: 'discount-code',

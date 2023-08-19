@@ -1,6 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { SharedService } from 'src/app/shared/shared.service';
 
+interface NameImages {
+  [key: string]: string;
+}
 @Component({
   selector: 'app-dialog-product',
   templateUrl: './dialog-product.component.html',
@@ -9,18 +18,26 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class DialogProductComponent implements OnInit {
   @Input() selectedProduct: any;
 
-  // form = {
-  //   name: null,
-  //   description: null,
-  //   color: null,
-  //   quantity: null,
-  //   price: null,
-  //   size: null,
-  //   banner: null,
-  //   pictures: null,
-  // };
+  link_avt = '';
+  nameImages: NameImages = {
+    link_img1: '',
+    link_img2: '',
+    link_img3: '',
+  };
 
-  form = this.fb.group({
+  get nameImagesKey() {
+    return Object.keys(this.nameImages);
+  }
+
+  get isShowAddImage() {
+    return (
+      !this.form.value.link_img1 ||
+      !this.form.value.link_img2 ||
+      !this.form.value.link_img3
+    );
+  }
+
+  form: FormGroup<any> = this.fb.group({
     name: this.fb.control('', Validators.required),
     quantity: this.fb.control(null, Validators.required),
     status: this.fb.control('', Validators.required),
@@ -28,7 +45,6 @@ export class DialogProductComponent implements OnInit {
     color: this.fb.control('', Validators.required),
     price: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
-    soldCount: this.fb.control(null, Validators.required),
     link_avt: this.fb.control('', Validators.required),
     link_img1: this.fb.control('', Validators.required),
     link_img2: this.fb.control('', Validators.required),
@@ -65,9 +81,57 @@ export class DialogProductComponent implements OnInit {
       value: '3XL',
     },
   ];
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private shareService: SharedService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.selectedProduct) {
+      this.shareService
+        .getDetailProduct(this.selectedProduct._id)
+        .subscribe(res => {
+          this.form.patchValue(res.product);
+        });
+    }
+  }
 
-  onChooseFile(event: any) {}
+  async onChooseFile(event: any, isAvatar: boolean) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      if (isAvatar) {
+        this.link_avt = String(inputElement.files[0].name);
+        const base64Image = await this.convertToBase64(inputElement.files[0]);
+        this.form.patchValue({
+          link_avt: base64Image,
+        });
+      } else {
+        const key = Object.keys(this.nameImages).find(key => {
+          return this.nameImages[key] === '';
+        });
+        if (key) {
+          this.nameImages[key] = String(inputElement.files[0].name);
+          const base64Image = await this.convertToBase64(inputElement.files[0]);
+          this.form.patchValue({
+            [key]: base64Image,
+          });
+        }
+      }
+    }
+  }
+
+  private convertToBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  onRemoveFile(type: string) {
+    if (type === 'link_avt') {
+      this.link_avt = '';
+    } else {
+      this.nameImages[type] = '';
+    }
+    this.form.patchValue({ [type]: '' });
+  }
 }

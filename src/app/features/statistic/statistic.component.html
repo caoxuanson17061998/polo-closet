@@ -15,19 +15,24 @@
       class="range-calendar"
       appendTo="body"
       placeholder="dd/mm/yyyy - dd/mm/yyyy"
-      [style]="{ width: '250px' }"></p-calendar>
+      [style]="{ width: '250px' }"
+      dateFormat="dd/mm/yy"></p-calendar>
     <span>10,570,000 VNĐ</span>
   </div>
 
   <div
     style="display: flex; justify-content: space-between; gap: 15px; flex: 1">
-    <img
-      src="../../../assets/images/revenue-by-month.svg"
-      alt="revenue-by-month"
-      style="flex: 1" />
-    <img
-      src="../../../assets/images/revenue-by-year.svg"
-      alt="revenue-by-year"
-      style="flex: 1" />
+    <div style="flex: 1">
+      <img
+        src="../../../assets/images/revenue-by-month.svg"
+        alt="revenue-by-month"
+        style="width: 100%; object-fit: cover" />
+    </div>
+    <div style="flex: 1">
+      <img
+        src="../../../assets/images/revenue-by-year.svg"
+        alt="revenue-by-year"
+        style="flex: 1" />
+    </div>
   </div>
 </div>

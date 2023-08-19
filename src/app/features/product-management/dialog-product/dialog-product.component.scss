@@ -30,3 +30,73 @@
   justify-content: space-between;
   gap: 16px;
 }
+
+.p-inputgroup {
+  width: 100%;
+  display: flex;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 10px;
+
+  input {
+    flex: 1;
+  }
+
+  input,
+  span {
+    border: none;
+  }
+}
+
+// Style file
+
+#controlFile {
+  display: none;
+}
+
+.upload-area {
+  border-radius: 5px;
+  border: 1px dashed #2a4d82;
+  padding: 15px 0px;
+  text-align: center;
+  font-weight: bold;
+  color: #2a4d82;
+  cursor: pointer;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.file-item {
+  border-radius: 10px;
+  background: var(--gray-6, #f2f2f2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 4px 10px;
+  border: 1px solid var(--gray-5, #e0e0e0);
+
+  .image {
+    height: 44px;
+    width: 40px;
+    object-fit: cover;
+    background-color: #fff;
+  }
+
+  .file-item-name {
+    flex: 1;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 24px;
+  }
+
+  .file-item-action {
+    cursor: pointer;
+  }
+}

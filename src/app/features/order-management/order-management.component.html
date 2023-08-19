@@ -1,0 +1,115 @@
+<div class="header">
+  <div class="search">
+    <input
+      type="text"
+      placeholder="Search ..."
+      (keyup.enter)="onSearch($event)" />
+    <i class="pi pi-search"></i>
+  </div>
+</div>
+
+<p-table [value]="ordersByCondition" class="table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 5%">STT</th>
+      <th>Tên khách hàng</th>
+      <th>Số diện thoại</th>
+      <th>Địa chỉ</th>
+      <th>Chương trình giảm giá</th>
+      <th>Thanh toán</th>
+      <th>Tổng đơn hàng</th>
+      <th style="flex: 2">Trạng thái</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-order let-rowIndex="rowIndex">
+    <tr>
+      <td style="width: 5%">
+        {{
+          ((currentPage - 1) * rowsPerPage + rowIndex + 1)
+            .toString()
+            .padStart(2, '0')
+        }}
+      </td>
+      <td>
+        {{ order?.fullname }}
+      </td>
+      <td>{{ order?.numberphone | phoneFormat }}</td>
+      <td>{{ order?.address }}</td>
+      <td>{{ order?.idpromotion }}</td>
+      <td>{{ order?.isPayment }}</td>
+      <td>{{ order?.discountedPrice | currency : 'VND' }}</td>
+      <td style="flex: 2">
+        <div
+          *ngIf="order?.status === Status.Pending"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+          ">
+          <button
+            class="button-action button-accept"
+            (click)="onShowAcceptDialog(order)">
+            Phê duyệt
+          </button>
+          <button
+            class="button-action button-cancel"
+            (click)="onShowCancelDialog(order)">
+            Hủy đơn
+          </button>
+        </div>
+        <span *ngIf="order?.status === Status.Confirmed">Đã giao hàng</span>
+        <span *ngIf="order?.status === Status.Delivered">Chờ giao hàng</span>
+        <span *ngIf="order?.status === Status.Canceled">Đã hủy đơn</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="isShowAcceptOrder"
+  [draggable]="false"
+  [resizable]="false"
+  position="center"
+  [style]="{ width: '28vw', height: 'auto' }"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  class="fsel-dialog">
+  <div *ngIf="selectedOrder" style="line-height: 1.4rem">
+    Bạn có muốn phê duyệt đơn hàng này không ?
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="button-list">
+      <button class="button button-cancel" (click)="onCloseDialog()">
+        Hủy
+      </button>
+      <button class="button button-add" (click)="onAcceptOrder()">
+        Xác nhận
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="isShowCancelOrder"
+  [draggable]="false"
+  [resizable]="false"
+  position="center"
+  [style]="{ width: '28vw', height: 'auto' }"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  class="fsel-dialog">
+  <div *ngIf="selectedOrder" style="line-height: 1.4rem">
+    Bạn có muốn hủy đơn hàng này không ?
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="button-list">
+      <button class="button button-cancel" (click)="onCloseDialog()">
+        Hủy
+      </button>
+      <button class="button button-add" (click)="onCancelOrder()">
+        Xác nhận
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>

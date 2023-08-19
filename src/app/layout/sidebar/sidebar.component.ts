@@ -29,6 +29,11 @@ export class SidebarComponent implements OnInit {
           routerLink: '/product-management',
         },
         {
+          label: 'Quản lý đơn hàng',
+          icon: 'product-management-icon',
+          routerLink: '/order-management',
+        },
+        {
           label: 'Mã giảm giá',
           icon: 'discount-icon',
           routerLink: '/discount-code',

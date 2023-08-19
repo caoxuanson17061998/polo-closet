@@ -23,6 +23,8 @@ import { AlertModule } from './shared/alert/alert.module';
 import { ConfirmDialogModule } from './shared/confirm-dialog/confirm-dialog.module';
 import { ConfirmDeleteModule } from './shared/confirm-delete/confirm-delete.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { OrderManagementComponent } from './features/order-management/order-management.component';
+import { PhoneFormatPipe } from './shared/phone-format.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     UserComponent,
     BannerManagementComponent,
     DialogProductComponent,
+    OrderManagementComponent,
+    PhoneFormatPipe,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     LayoutModule,
     SharedModule,
     AuthModule,
-    FormsModule,
     AlertModule,
     ConfirmDialogModule,
     ConfirmDeleteModule,

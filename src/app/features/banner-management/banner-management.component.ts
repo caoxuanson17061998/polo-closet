@@ -17,9 +17,6 @@ export class BannerManagementComponent implements OnInit {
     link4: '',
   };
 
-  selectedImage: File | null = null;
-  base64Image: string | null = null;
-
   constructor(
     private shareService: SharedService,
     private notificationService: NotificationService,
@@ -40,10 +37,8 @@ export class BannerManagementComponent implements OnInit {
   async onChangeImage(event: any, link: 'link1' | 'link2' | 'link3' | 'link4') {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedImage = inputElement.files[0];
-      this.base64Image = await this.convertToBase64(this.selectedImage);
-      console.log(this.base64Image);
-      this.banner[link] = this.base64Image;
+      const selectedImage = inputElement.files[0];
+      this.banner[link] = await this.convertToBase64(selectedImage);
     }
   }
 

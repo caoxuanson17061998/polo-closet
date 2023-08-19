@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
   get totalUsers() {
     if (this.keyword) {
       return this.users.filter(user =>
-        user.fullname.includes(String(this.keyword))
+        user.fullname.toLowerCase().includes(String(this.keyword).toLowerCase())
       ).length;
     }
     return this.users.length;

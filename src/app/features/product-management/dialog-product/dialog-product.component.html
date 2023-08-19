@@ -1,4 +1,3 @@
-{{ form.value | json }}
 <div class="wrapper" [formGroup]="form">
   <div class="field">
     <label for="name">Tên:</label>
@@ -37,49 +36,82 @@
       formControlName="size"
       optionLabel="name"
       optionValue="value"
-      display="chip"></p-multiSelect>
+      display="chip"
+      [style]="{ height: '50px', width: '100%' }"></p-multiSelect>
   </div>
   <div class="field">
-    <label for="banner">Banner:</label>
+    <label for="status">Trạng thái</label>
+    <p-dropdown
+      inputId="status"
+      class="dropdown"
+      [options]="['in stock', 'out of business', 'out of stock']"
+      formControlName="status"
+      [style]="{ height: '50px', width: '100%' }"></p-dropdown>
+  </div>
+  <div class="field">
+    <label for="avatar">Ảnh bìa:</label>
     <!-- <input type="text" id="banner" formControlName="banner" /> -->
-    <input type="text" id="banner" />
-    <!-- <div class="upload-area">
-      <div class="file-item" (click)="controlFile.click()">
-        <span class="cursor-pointer">Add file</span>
+    <div *ngIf="!form.value['link_avt']" class="upload-area">
+      <div (click)="controlFile.click()">
+        <span class="cursor-pointer">Thêm ảnh</span>
         <input
           type="file"
           #controlFile
-          class="d-none"
-          (change)="onChooseFile($event)" />
+          style="display: none"
+          (change)="onChooseFile($event, true)" />
       </div>
     </div>
-    <div class="file-list" *ngFor="let filePath of filePaths">
-      <div class="file-item">
-        <div class="file-item-icon">
-          <img src="./assets/images/icons/files/pdf.png" />
-        </div>
-        <div
-          class="file-item-name mr-2"
-          pTooltip="{{ filePath | getFileName }}"
-          tooltipPosition="top">
-          {{ filePath | getFileName }}
-        </div>
-        <a class="file-item-action" [href]="filePath" target="_blank">
-          <img
-            src="../../../../../../../assets/icons/actions/eye.svg"
-            alt="eye" />
-        </a>
-        <span class="file-item-action" (click)="onRemoveFile(filePath)">
-          <img
-            src="../../../../../../../assets/icons/actions/close.svg"
-            alt="close" />
-        </span>
+    <div *ngIf="form.value['link_avt']" class="file-item">
+      <img [src]="form.value['link_avt']" [alt]="link_avt" class="image" />
+      <div class="file-item-name mr-2">
+        {{ link_avt || 'Ảnh bìa' }}
       </div>
-    </div> -->
+      <a
+        class="file-item-action"
+        [attr.href]="form.value['link_avt']"
+        target="_blank">
+        <img src="../../../../assets/images/eye.svg" alt="eye" />
+      </a>
+      <span class="file-item-action" (click)="onRemoveFile('link_avt')">
+        <img src="../../../../assets/images/close.svg" alt="close" />
+      </span>
+    </div>
+    <!-- <div class="file-list" *ngFor="let filePath of filePaths"> -->
+    <!-- </div> -->
   </div>
   <div class="field">
-    <label for="picture">Ảnh:</label>
+    <label for="image">Ảnh mô tả:</label>
+    <div class="upload-area" *ngIf="isShowAddImage">
+      <div (click)="controlFile.click()">
+        <span class="cursor-pointer">Thêm ảnh</span>
+        <input
+          type="file"
+          #controlFile
+          style="display: none"
+          (change)="onChooseFile($event, false)" />
+      </div>
+    </div>
+    <div class="file-list">
+      <ng-container *ngFor="let key of nameImagesKey; index as index">
+        <div *ngIf="form.value[key]" class="file-item">
+          <img [src]="form.value[key]" [alt]="nameImages[key]" class="image" />
+          <div class="file-item-name mr-2">
+            <span *ngIf="nameImages[key]">{{ nameImages[key] }}</span>
+            <span *ngIf="!nameImages[key]">Ảnh mô tả {{ index + 1 }}</span>
+          </div>
+          <a
+            class="file-item-action"
+            [attr.href]="form.value[key]"
+            target="_blank">
+            <img src="../../../../assets/images/eye.svg" alt="eye" />
+          </a>
+          <span class="file-item-action" (click)="onRemoveFile(key)">
+            <img src="../../../../assets/images/close.svg" alt="close" />
+          </span>
+        </div>
+      </ng-container>
+    </div>
     <!-- <input type="text" id="picture" formControlName="pictures" /> -->
-    <input type="text" id="picture" />
+    <!-- <input type="text" id="image" /> -->
   </div>
 </div>
