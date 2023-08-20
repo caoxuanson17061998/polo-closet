@@ -36,7 +36,9 @@ export class ProductManagementComponent implements OnInit {
   get totalProducts(): number {
     if (this.keyword) {
       return this.products.filter(product =>
-        product.name.toLowerCase().includes(String(this.keyword).toLowerCase())
+        product.name
+          .toLowerCase()
+          .includes(String(this.keyword).trim().toLowerCase())
       ).length;
     }
     return this.products.length;
@@ -50,7 +52,7 @@ export class ProductManagementComponent implements OnInit {
         products = this.products.filter(product =>
           product.name
             .toLowerCase()
-            .includes(String(this.keyword).toLowerCase())
+            .includes(String(this.keyword).trim().toLowerCase())
         );
       }
       return products.slice(
@@ -149,10 +151,11 @@ export class ProductManagementComponent implements OnInit {
     if (this.dialogProductComponent && this.selectedProduct) {
       const { invalid, value } = this.dialogProductComponent.form;
 
-      // if (invalid) {
-      //   this.onCloseDialog();
-      //   return;
-      // }
+      if (invalid) {
+        this.notificationService.error('Cập nhật sản phẩm không thành công');
+        this.onCloseDialog();
+        return;
+      }
 
       if (value) {
         this.spinner.show();
@@ -165,7 +168,7 @@ export class ProductManagementComponent implements OnInit {
               this.ngOnInit();
             },
             error: () => {
-              this.notificationService.success(
+              this.notificationService.error(
                 'Cập nhật sản phẩm không thành công'
               );
             },
@@ -177,10 +180,11 @@ export class ProductManagementComponent implements OnInit {
   onAddProduct() {
     if (this.dialogProductComponent) {
       const { invalid, value } = this.dialogProductComponent.form;
-      // if (invalid) {
-      //   this.onCloseDialog();
-      //   return;
-      // }
+      if (invalid) {
+        this.notificationService.error('Tạo sản phẩm không thành công');
+        this.onCloseDialog();
+        return;
+      }
 
       if (value) {
         this.spinner.show();
@@ -191,7 +195,7 @@ export class ProductManagementComponent implements OnInit {
             this.ngOnInit();
           },
           error: () => {
-            this.notificationService.success('Tạo sản phẩm không thành công');
+            this.notificationService.error('Tạo sản phẩm không thành công');
           },
         });
       }

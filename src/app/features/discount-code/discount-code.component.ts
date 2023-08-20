@@ -2,6 +2,7 @@ import { NotificationService } from './../../shared/notification.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NoWhitespaceValidator } from 'src/app/shared/no-white-space.validator';
 import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
@@ -10,9 +11,16 @@ import { SharedService } from 'src/app/shared/shared.service';
   styleUrls: ['./discount-code.component.scss'],
 })
 export class DiscountCodeComponent implements OnInit {
+  currentDate = new Date();
   form = this.fb.group({
-    title: this.fb.control(null, Validators.required),
-    content: this.fb.control(null, Validators.required),
+    title: this.fb.control(null, [
+      Validators.required,
+      NoWhitespaceValidator(),
+    ]),
+    content: this.fb.control(null, [
+      Validators.required,
+      NoWhitespaceValidator(),
+    ]),
     startDate: this.fb.control(null, Validators.required),
     endDate: this.fb.control(null, Validators.required),
     discountType: this.fb.control('percent', Validators.required),
@@ -20,7 +28,7 @@ export class DiscountCodeComponent implements OnInit {
     orderValueCondition: this.fb.control(null, Validators.required),
   });
 
-  typeOptions = [{ label: 'Percent', value: 'percent' }];
+  typeOptions = [{ label: 'Phần trăm', value: 'percent' }];
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +59,11 @@ export class DiscountCodeComponent implements OnInit {
       return;
     }
 
+    if (Number(value.discountValue) === 0) {
+      this.notificationService.error('Giá trị khuyến mại phải lớn hơn 0');
+      return;
+    }
+
     if (value.startDate && value.endDate) {
       const startDate = new Date(value.startDate).getTime();
       const endDate = new Date(value.endDate).getTime();
@@ -69,16 +82,9 @@ export class DiscountCodeComponent implements OnInit {
         this.onCancel();
       },
       error: () => {
-        this.notificationService.success('Tạo mã giảm giá thất bại');
+        this.notificationService.error('Tạo mã giảm giá thất bại');
         this.onCancel();
       },
     });
-  }
-
-  onlyNumberKey(evt: any) {
-    // Only ASCII character in that range allowed
-    var ASCIICode = evt.which ? evt.which : evt.keyCode;
-    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) return false;
-    return true;
   }
 }

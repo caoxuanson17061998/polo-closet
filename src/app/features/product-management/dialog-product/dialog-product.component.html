@@ -44,7 +44,9 @@
     <p-dropdown
       inputId="status"
       class="dropdown"
-      [options]="['in stock', 'out of business', 'out of stock']"
+      [options]="statusOptions"
+      optionLabel="label"
+      optionValue="value"
       formControlName="status"
       [style]="{ height: '50px', width: '100%' }"></p-dropdown>
   </div>

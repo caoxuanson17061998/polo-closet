@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { NoWhitespaceValidator } from 'src/app/shared/no-white-space.validator';
 import { SharedService } from 'src/app/shared/shared.service';
 
 interface NameImages {
@@ -37,14 +38,32 @@ export class DialogProductComponent implements OnInit {
     );
   }
 
+  statusOptions = [
+    {
+      label: 'Còn hàng',
+      value: 'in stock',
+    },
+    {
+      label: 'Hết hàng',
+      value: 'out of stock',
+    },
+    {
+      label: 'Ngừng bán',
+      value: 'out of business',
+    },
+  ];
+
   form: FormGroup<any> = this.fb.group({
-    name: this.fb.control('', Validators.required),
-    quantity: this.fb.control(null, Validators.required),
-    status: this.fb.control('', Validators.required),
+    name: this.fb.control('', [Validators.required, NoWhitespaceValidator()]),
+    quantity: this.fb.control(null, [Validators.required, Validators.min(1)]),
+    status: this.fb.control('in stock', Validators.required),
     size: this.fb.control([], Validators.required),
-    color: this.fb.control('', Validators.required),
-    price: this.fb.control('', Validators.required),
-    description: this.fb.control('', Validators.required),
+    color: this.fb.control('', [Validators.required, NoWhitespaceValidator()]),
+    price: this.fb.control('', [Validators.required, Validators.min(1)]),
+    description: this.fb.control('', [
+      Validators.required,
+      NoWhitespaceValidator(),
+    ]),
     link_avt: this.fb.control('', Validators.required),
     link_img1: this.fb.control('', Validators.required),
     link_img2: this.fb.control('', Validators.required),

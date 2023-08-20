@@ -44,7 +44,7 @@ export class OrderManagementComponent implements OnInit {
       return this.orders.filter(order =>
         order.fullname
           .toLowerCase()
-          .includes(String(this.keyword).toLowerCase())
+          .includes(String(this.keyword).trim().toLowerCase())
       ).length;
     }
     return this.orders.length;
@@ -58,7 +58,7 @@ export class OrderManagementComponent implements OnInit {
         orders = this.orders.filter(order =>
           order.fullname
             .toLowerCase()
-            .includes(String(this.keyword).toLowerCase())
+            .includes(String(this.keyword).trim().toLowerCase())
         );
       }
       return orders.slice(
