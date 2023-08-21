@@ -29,7 +29,10 @@ export class DiscountCodeComponent implements OnInit {
     orderValueCondition: this.fb.control(null, Validators.required),
   });
 
-  typeOptions = [{ label: 'Phần trăm', value: 'percent' }];
+  typeOptions = [
+    { label: 'Phần trăm', value: 'percent' },
+    { label: 'Theo voucher', value: 'amount' },
+  ];
 
   currentPromotion: any;
 
@@ -79,7 +82,7 @@ export class DiscountCodeComponent implements OnInit {
       content: null,
       startDate: null,
       endDate: null,
-      discountType: null,
+      discountType: 'percent',
       discountValue: null,
       orderValueCondition: null,
     });

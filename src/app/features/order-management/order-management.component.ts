@@ -95,9 +95,10 @@ export class OrderManagementComponent implements OnInit {
           this.orders = res.orders.map((order: any) => {
             return {
               ...order,
-              userId: order.iduser._id,
-              fullname: order.iduser.fullname,
-              numberphone: order.iduser.numberphone,
+              userId: order.iduser?._id,
+              fullname: order.iduser?.fullname,
+              numberphone: order.iduser?.numberphone,
+              promotionName: order.idpromotion?.title,
             };
           });
         }
