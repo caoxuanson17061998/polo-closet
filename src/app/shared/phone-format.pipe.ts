@@ -4,7 +4,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'phoneFormat',
 })
 export class PhoneFormatPipe implements PipeTransform {
-  transform(value: string): string {
+  transform(value: string): string | null {
+    if (!value) {
+      return null;
+    }
     const numericCharacters = value.replace(/\D/g, ''); // Loại bỏ ký tự không phải số
 
     const formattedPhoneNumber = numericCharacters.replace(
