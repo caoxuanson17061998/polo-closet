@@ -20,6 +20,7 @@
       <th>Tên</th>
       <th style="flex: 3">Mô tả</th>
       <th>Giá bán</th>
+      <th>Số lượng</th>
       <th>Số lượng đã bán</th>
       <th>Màu sắc</th>
       <th>Size</th>
@@ -48,6 +49,7 @@
       </td>
       <td style="flex: 3">{{ product?.description }}</td>
       <td>{{ product?.price | currency : 'VND' }}</td>
+      <td>{{ product?.quantity }}</td>
       <td>{{ product?.soldCount }}</td>
       <td>{{ product?.color }}</td>
       <td>{{ product?.size?.join(', ') }}</td>

@@ -95,6 +95,19 @@ export class SharedService {
     );
   }
 
+  getPromotions(): Observable<any> {
+    return this.httpClient.get<any>(`${this.PROMOTION_URL}/list`).pipe(
+      map(res => {
+        this.spinner.hide();
+        return res;
+      }),
+      catchError(() => {
+        this.spinner.hide();
+        return EMPTY;
+      })
+    );
+  }
+
   createPromotion(payload: any): Observable<any> {
     return this.httpClient
       .post<any>(`${this.PROMOTION_URL}/create`, payload)

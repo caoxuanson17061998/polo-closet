@@ -2,6 +2,7 @@ import { NotificationService } from './../../shared/notification.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs';
 import { NoWhitespaceValidator } from 'src/app/shared/no-white-space.validator';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -30,6 +31,8 @@ export class DiscountCodeComponent implements OnInit {
 
   typeOptions = [{ label: 'Phần trăm', value: 'percent' }];
 
+  currentPromotion: any;
+
   constructor(
     private fb: FormBuilder,
     private shardService: SharedService,
@@ -37,7 +40,40 @@ export class DiscountCodeComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currentDate = new Date().getTime();
+    this.shardService
+      .getPromotions()
+      .pipe(take(1))
+      .subscribe(res => {
+        // debugger;
+        this.currentPromotion = res.promotions.find((promotion: any) => {
+          const startDate = promotion.startDate
+            ? new Date(promotion.startDate).getTime()
+            : null;
+          const endDate = promotion.endDate
+            ? new Date(promotion.endDate).getTime()
+            : null;
+
+          if (startDate && endDate) {
+            console.log({ startDate, currentDate, endDate });
+            return startDate < currentDate && endDate > currentDate;
+          }
+
+          return null;
+        });
+
+        if (this.currentPromotion) {
+          this.currentPromotion.startDate = new Date(
+            this.currentPromotion.startDate
+          );
+          this.currentPromotion.endDate = new Date(
+            this.currentPromotion.endDate
+          );
+          this.form.patchValue(this.currentPromotion);
+        }
+      });
+  }
 
   onCancel() {
     this.form.patchValue({
