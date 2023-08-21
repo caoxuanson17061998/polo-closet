@@ -46,7 +46,6 @@ export class DiscountCodeComponent implements OnInit {
       .getPromotions()
       .pipe(take(1))
       .subscribe(res => {
-        // debugger;
         this.currentPromotion = res.promotions.find((promotion: any) => {
           const startDate = promotion.startDate
             ? new Date(promotion.startDate).getTime()
@@ -56,7 +55,6 @@ export class DiscountCodeComponent implements OnInit {
             : null;
 
           if (startDate && endDate) {
-            console.log({ startDate, currentDate, endDate });
             return startDate < currentDate && endDate > currentDate;
           }
 

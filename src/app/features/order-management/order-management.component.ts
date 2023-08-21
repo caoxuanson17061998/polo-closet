@@ -91,14 +91,16 @@ export class OrderManagementComponent implements OnInit {
       .getOrders()
       .pipe(take(1))
       .subscribe(res => {
-        this.orders = res.orders.map((order: any) => {
-          return {
-            ...order,
-            userId: order.iduser._id,
-            fullname: order.iduser.fullname,
-            numberphone: order.iduser.numberphone,
-          };
-        });
+        if (res.orders && res.orders.length) {
+          this.orders = res.orders.map((order: any) => {
+            return {
+              ...order,
+              userId: order.iduser._id,
+              fullname: order.iduser.fullname,
+              numberphone: order.iduser.numberphone,
+            };
+          });
+        }
       });
   }
 

@@ -15,7 +15,8 @@
         [showIcon]="true"
         class="calendar"
         formControlName="startDate"
-        dateFormat="dd/mm/yy"></p-calendar>
+        dateFormat="dd/mm/yy"
+        [minDate]="currentDate"></p-calendar>
     </div>
     <div class="field">
       <label for="endDate">Thời gian kết thúc</label>
@@ -24,7 +25,8 @@
         [showIcon]="true"
         class="calendar"
         formControlName="endDate"
-        dateFormat="dd/mm/yy"></p-calendar>
+        dateFormat="dd/mm/yy"
+        [minDate]="currentDate"></p-calendar>
     </div>
     <div class="field">
       <label for="discountType">Kiểu khuyến mại</label>
