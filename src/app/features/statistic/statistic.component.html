@@ -15,9 +15,11 @@
       class="range-calendar"
       appendTo="body"
       placeholder="dd/mm/yyyy - dd/mm/yyyy"
+      [(ngModel)]="rangeDates"
       [style]="{ width: '250px' }"
+      (onSelect)="onSelectRangeDate()"
       dateFormat="dd/mm/yy"></p-calendar>
-    <span>10,570,000 VNĐ</span>
+    <span>{{ revenue }}</span>
   </div>
 
   <div
@@ -32,7 +34,7 @@
       <img
         src="../../../assets/images/revenue-by-year.svg"
         alt="revenue-by-year"
-        style="flex: 1" />
+        style="width: 100%; object-fit: cover" />
     </div>
   </div>
 </div>

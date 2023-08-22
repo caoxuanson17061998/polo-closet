@@ -210,4 +210,17 @@ export class SharedService {
         })
       );
   }
+
+  getRevenue(payload: { fromDate: string; toDate: string }): Observable<any> {
+    return this.httpClient.post<any>(`${this.ORDER_URL}/revenue`, payload).pipe(
+      map(res => {
+        this.spinner.hide();
+        return res;
+      }),
+      catchError(() => {
+        this.spinner.hide();
+        return EMPTY;
+      })
+    );
+  }
 }
