@@ -223,4 +223,19 @@ export class SharedService {
       })
     );
   }
+
+  getDetailOrder(orderId: string): Observable<any> {
+    return this.httpClient
+      .get<any>(`${this.ORDER_URL}/suborders/${orderId}`)
+      .pipe(
+        map(res => {
+          this.spinner.hide();
+          return res;
+        }),
+        catchError(() => {
+          this.spinner.hide();
+          return EMPTY;
+        })
+      );
+  }
 }

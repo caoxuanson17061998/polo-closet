@@ -19,6 +19,7 @@
       <th>Thanh toán</th>
       <th>Tổng đơn hàng</th>
       <th style="flex: 2">Trạng thái</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-order let-rowIndex="rowIndex">
@@ -61,6 +62,13 @@
         <span *ngIf="order?.status === Status.Confirmed">Đã giao hàng</span>
         <span *ngIf="order?.status === Status.Delivered">Chờ giao hàng</span>
         <span *ngIf="order?.status === Status.Canceled">Đã hủy đơn</span>
+      </td>
+      <td>
+        <button
+          (click)="onShowDetailOrder(order)"
+          style="background-color: transparent; border: none">
+          Chi tiết
+        </button>
       </td>
     </tr>
   </ng-template>
@@ -112,4 +120,19 @@
       </button>
     </div>
   </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="isShowDetailDialog"
+  [draggable]="false"
+  [resizable]="false"
+  position="right"
+  [style]="{ width: '32vw' }"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  class="fsel-dialog">
+  <ng-template pTemplate="header"> Chi tiết đơn hàng </ng-template>
+  <app-order-detail
+    *ngIf="isShowDetailDialog"
+    [selectedOrder]="selectedOrder"></app-order-detail>
 </p-dialog>

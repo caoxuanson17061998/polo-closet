@@ -25,6 +25,7 @@ import { ConfirmDeleteModule } from './shared/confirm-delete/confirm-delete.modu
 import { MatDialogModule } from '@angular/material/dialog';
 import { OrderManagementComponent } from './features/order-management/order-management.component';
 import { PhoneFormatPipe } from './shared/phone-format.pipe';
+import { OrderDetailComponent } from './features/order-management/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PhoneFormatPipe } from './shared/phone-format.pipe';
     DialogProductComponent,
     OrderManagementComponent,
     PhoneFormatPipe,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,

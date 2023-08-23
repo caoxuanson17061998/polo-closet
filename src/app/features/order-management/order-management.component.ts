@@ -11,11 +11,12 @@ export enum Status {
   Canceled = 'canceled',
 }
 
-interface Order {
+export interface Order {
   _id: string;
   userId: string;
   fullname: string;
   numberphone: string;
+  address: string;
   status: Status;
   idpromotion?: any;
   originalPrice: number;
@@ -34,10 +35,11 @@ export class OrderManagementComponent implements OnInit {
 
   Status = Status;
 
-  selectedOrder: Order | null = null;
+  selectedOrder!: Order;
 
   isShowAcceptOrder = false;
   isShowCancelOrder = false;
+  isShowDetailDialog = false;
 
   get totalOrders(): number {
     if (this.keyword) {
@@ -98,6 +100,7 @@ export class OrderManagementComponent implements OnInit {
               userId: order.iduser?._id,
               fullname: order.iduser?.fullname,
               numberphone: order.iduser?.numberphone,
+              address: order.iduser?.address,
               promotionName: order.idpromotion?.title,
             };
           });
@@ -176,5 +179,10 @@ export class OrderManagementComponent implements OnInit {
           },
         });
     }
+  }
+
+  onShowDetailOrder(order: Order) {
+    this.selectedOrder = order;
+    this.isShowDetailDialog = true;
   }
 }
