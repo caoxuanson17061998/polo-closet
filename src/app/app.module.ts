@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { OrderManagementComponent } from './features/order-management/order-management.component';
 import { PhoneFormatPipe } from './shared/phone-format.pipe';
 import { OrderDetailComponent } from './features/order-management/order-detail/order-detail.component';
+import { ThousandsSeparatorPipe } from './shared/currency-format.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { OrderDetailComponent } from './features/order-management/order-detail/o
     OrderManagementComponent,
     PhoneFormatPipe,
     OrderDetailComponent,
+    ThousandsSeparatorPipe,
   ],
   imports: [
     BrowserModule,

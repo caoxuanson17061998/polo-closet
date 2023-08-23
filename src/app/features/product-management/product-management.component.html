@@ -48,7 +48,7 @@
         {{ product?.name }}
       </td>
       <td style="flex: 3">{{ product?.description }}</td>
-      <td>{{ product?.price | currency : 'VND' }}</td>
+      <td>{{ product?.price | thousandsSeparator }}</td>
       <td>{{ product?.quantity }}</td>
       <td>{{ product?.soldCount }}</td>
       <td>{{ product?.color }}</td>

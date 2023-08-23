@@ -54,6 +54,6 @@
 <div class="field-item">
   <label for="product">Tổng giá trị đơn hàng</label>
   <span style="font-size: 20px; color: #f00">{{
-    selectedOrder?.discountedPrice | currency : 'VND'
+    selectedOrder.discountedPrice | thousandsSeparator
   }}</span>
 </div>
