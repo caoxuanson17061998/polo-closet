@@ -1,61 +1,122 @@
-<div class="wrapper" [formGroup]="form">
-  <div class="field">
-    <label for="title">Tiêu đề mã giảm giá:</label>
-    <input type="text" id="title" formControlName="title" />
+<div style="display: flex; gap: 50px">
+  <div class="wrapper" [formGroup]="form">
+    <div class="field">
+      <label for="title">Tiêu đề mã giảm giá:</label>
+      <input type="text" id="title" formControlName="title" />
+    </div>
+    <div class="field">
+      <label for="content">Nội dung:</label>
+      <input type="text" id="content" formControlName="content" />
+    </div>
+    <div class="field">
+      <label for="startDate">Thời gian bắt đầu:</label>
+      <p-calendar
+        inputId="startDate"
+        [showIcon]="true"
+        class="calendar"
+        formControlName="startDate"
+        dateFormat="dd/mm/yy"
+        [minDate]="currentDate"></p-calendar>
+    </div>
+    <div class="field">
+      <label for="endDate">Thời gian kết thúc</label>
+      <p-calendar
+        inputId="endDate"
+        [showIcon]="true"
+        class="calendar"
+        formControlName="endDate"
+        dateFormat="dd/mm/yy"
+        [minDate]="currentDate"></p-calendar>
+    </div>
+    <div class="field">
+      <label for="discountType">Kiểu khuyến mại</label>
+      <p-dropdown
+        inputId="discountType"
+        class="dropdown"
+        [options]="typeOptions"
+        optionLabel="label"
+        optionValue="value"
+        formControlName="discountType"></p-dropdown>
+    </div>
+    <div class="field">
+      <label for="discountValue">Giá trị khuyến mại</label>
+      <input
+        type="number"
+        id="discountValue"
+        formControlName="discountValue"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+    </div>
+    <div class="field">
+      <label for="orderValueCondition">Điều kiện khuyến mại</label>
+      <input
+        type="number"
+        id="orderValueCondition"
+        formControlName="orderValueCondition"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+    </div>
+    <div class="button-list">
+      <button class="button-cancel" (click)="onCancel()">HỦY</button>
+      <button class="button-add" (click)="onAdd()">THÊM</button>
+    </div>
   </div>
-  <div class="field">
-    <label for="content">Nội dung:</label>
-    <input type="text" id="content" formControlName="content" />
-  </div>
-  <div class="field">
-    <label for="startDate">Thời gian bắt đầu:</label>
-    <p-calendar
-      inputId="startDate"
-      [showIcon]="true"
-      class="calendar"
-      formControlName="startDate"
-      dateFormat="dd/mm/yy"
-      [minDate]="currentDate"></p-calendar>
-  </div>
-  <div class="field">
-    <label for="endDate">Thời gian kết thúc</label>
-    <p-calendar
-      inputId="endDate"
-      [showIcon]="true"
-      class="calendar"
-      formControlName="endDate"
-      dateFormat="dd/mm/yy"
-      [minDate]="currentDate"></p-calendar>
-  </div>
-  <div class="field">
-    <label for="discountType">Kiểu khuyến mại</label>
-    <p-dropdown
-      inputId="discountType"
-      class="dropdown"
-      [options]="typeOptions"
-      optionLabel="label"
-      optionValue="value"
-      formControlName="discountType"
-      [disabled]="currentPromotion"></p-dropdown>
-  </div>
-  <div class="field">
-    <label for="discountValue">Giá trị khuyến mại</label>
-    <input
-      type="number"
-      id="discountValue"
-      formControlName="discountValue"
-      onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-  </div>
-  <div class="field">
-    <label for="orderValueCondition">Điều kiện khuyến mại</label>
-    <input
-      type="number"
-      id="orderValueCondition"
-      formControlName="orderValueCondition"
-      onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-  </div>
-  <div class="button-list">
-    <button class="button-cancel" (click)="onCancel()">HỦY</button>
-    <button class="button-add" (click)="onAdd()">THÊM</button>
-  </div>
+
+  <fieldset [disabled]="true">
+    <div class="wrapper" [formGroup]="form2">
+      <div class="field">
+        <label for="title">Tiêu đề mã giảm giá:</label>
+        <input type="text" id="title" formControlName="title" />
+      </div>
+      <div class="field">
+        <label for="content">Nội dung:</label>
+        <input type="text" id="content" formControlName="content" />
+      </div>
+      <div class="field">
+        <label for="startDate">Thời gian bắt đầu:</label>
+        <p-calendar
+          inputId="startDate"
+          [showIcon]="true"
+          class="calendar"
+          formControlName="startDate"
+          dateFormat="dd/mm/yy"
+          [minDate]="currentDate"></p-calendar>
+      </div>
+      <div class="field">
+        <label for="endDate">Thời gian kết thúc</label>
+        <p-calendar
+          inputId="endDate"
+          [showIcon]="true"
+          class="calendar"
+          formControlName="endDate"
+          dateFormat="dd/mm/yy"
+          [minDate]="currentDate"></p-calendar>
+      </div>
+      <div class="field">
+        <label for="discountType">Kiểu khuyến mại</label>
+        <p-dropdown
+          inputId="discountType"
+          class="dropdown"
+          [options]="typeOptions"
+          optionLabel="label"
+          optionValue="value"
+          formControlName="discountType"
+          [disabled]="currentPromotion"></p-dropdown>
+      </div>
+      <div class="field">
+        <label for="discountValue">Giá trị khuyến mại</label>
+        <input
+          type="number"
+          id="discountValue"
+          formControlName="discountValue"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+      </div>
+      <div class="field">
+        <label for="orderValueCondition">Điều kiện khuyến mại</label>
+        <input
+          type="number"
+          id="orderValueCondition"
+          formControlName="orderValueCondition"
+          onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+      </div>
+    </div>
+  </fieldset>
 </div>

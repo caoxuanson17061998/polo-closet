@@ -29,6 +29,22 @@ export class DiscountCodeComponent implements OnInit {
     orderValueCondition: this.fb.control(null, Validators.required),
   });
 
+  form2 = this.fb.group({
+    title: this.fb.control(null, [
+      Validators.required,
+      NoWhitespaceValidator(),
+    ]),
+    content: this.fb.control(null, [
+      Validators.required,
+      NoWhitespaceValidator(),
+    ]),
+    startDate: this.fb.control(null, Validators.required),
+    endDate: this.fb.control(null, Validators.required),
+    discountType: this.fb.control('percent', Validators.required),
+    discountValue: this.fb.control(null, Validators.required),
+    orderValueCondition: this.fb.control(null, Validators.required),
+  });
+
   typeOptions = [
     { label: 'Phần trăm', value: 'percent' },
     { label: 'Theo voucher', value: 'amount' },
@@ -43,7 +59,38 @@ export class DiscountCodeComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currentDate = new Date().getTime();
+    this.shardService
+      .getPromotions()
+      .pipe(take(1))
+      .subscribe(res => {
+        this.currentPromotion = res.promotions.find((promotion: any) => {
+          const startDate = promotion.startDate
+            ? new Date(promotion.startDate).getTime()
+            : null;
+          const endDate = promotion.endDate
+            ? new Date(promotion.endDate).getTime()
+            : null;
+
+          if (startDate && endDate) {
+            return startDate < currentDate && endDate > currentDate;
+          }
+
+          return null;
+        });
+
+        if (this.currentPromotion) {
+          this.currentPromotion.startDate = new Date(
+            this.currentPromotion.startDate
+          );
+          this.currentPromotion.endDate = new Date(
+            this.currentPromotion.endDate
+          );
+          this.form2.patchValue(this.currentPromotion);
+        }
+      });
+  }
 
   onCancel() {
     this.form.patchValue({
