@@ -1,6 +1,6 @@
 <div class="field-item">
   <label for="customerName">Tên khách hàng</label>
-  <span>{{ selectedOrder?.fullname }}</span>
+  <span>{{ selectedOrder.fullname }}</span>
 </div>
 <div class="field-item">
   <label for="phoneNumber">Số điện thoại</label>
@@ -8,11 +8,11 @@
 </div>
 <div class="field-item">
   <label for="address">Địa chỉ</label>
-  <span>{{ selectedOrder?.address }}</span>
+  <span>{{ selectedOrder.address }}</span>
 </div>
 <div class="field-item">
   <label for="discountCode">Mã giảm giá</label>
-  <span>{{ selectedOrder?.idpromotion?.title }}</span>
+  <span>{{ selectedOrder.idpromotion.title }}</span>
 </div>
 
 <div class="field-item">
@@ -41,7 +41,7 @@
         [src]="order.idproduct.link_avt"
         [alt]="order.idproduct.name" />
       <div style="flex: 1">
-        <div>{{ order?.idproduct?.name }}</div>
+        <div>{{ order?.idproduct.name }}</div>
         <div style="display: flex; gap: 50px">
           <span>Số lượng:{{ order?.quantity }}</span>
           <span>Size:{{ order?.size }}</span>

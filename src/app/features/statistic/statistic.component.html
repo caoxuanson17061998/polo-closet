@@ -19,7 +19,7 @@
       [style]="{ width: '250px' }"
       (onSelect)="onSelectRangeDate()"
       dateFormat="dd/mm/yy"></p-calendar>
-    <span>{{ revenue }}</span>
+    <span>{{ revenue | thousandsSeparator }}</span>
   </div>
 
   <div

@@ -26,7 +26,6 @@ export class StatisticComponent implements OnInit {
   ngOnInit(): void {}
 
   onSelectRangeDate() {
-    console.log(this.rangeDates);
     const startDate = this.rangeDates[0]
       ? this.rangeDates[0].toISOString()
       : null;
