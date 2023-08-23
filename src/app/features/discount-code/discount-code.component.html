@@ -1,7 +1,8 @@
 <div style="display: flex; gap: 50px">
   <div class="wrapper" [formGroup]="form">
+    <p style="font-size: 20px">Tạo mã giảm giá</p>
     <div class="field">
-      <label for="title">Tiêu đề mã giảm giá:</label>
+      <label for="title">Tiêu đề:</label>
       <input type="text" id="title" formControlName="title" />
     </div>
     <div class="field">
@@ -62,8 +63,9 @@
 
   <fieldset [disabled]="true">
     <div class="wrapper" [formGroup]="form2">
+      <p style="font-size: 20px">Mã giảm giá gần nhất</p>
       <div class="field">
-        <label for="title">Tiêu đề mã giảm giá:</label>
+        <label for="title">Tiêu đề:</label>
         <input type="text" id="title" formControlName="title" />
       </div>
       <div class="field">
