@@ -43,38 +43,7 @@ export class DiscountCodeComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {
-    const currentDate = new Date().getTime();
-    this.shardService
-      .getPromotions()
-      .pipe(take(1))
-      .subscribe(res => {
-        this.currentPromotion = res.promotions.find((promotion: any) => {
-          const startDate = promotion.startDate
-            ? new Date(promotion.startDate).getTime()
-            : null;
-          const endDate = promotion.endDate
-            ? new Date(promotion.endDate).getTime()
-            : null;
-
-          if (startDate && endDate) {
-            return startDate < currentDate && endDate > currentDate;
-          }
-
-          return null;
-        });
-
-        if (this.currentPromotion) {
-          this.currentPromotion.startDate = new Date(
-            this.currentPromotion.startDate
-          );
-          this.currentPromotion.endDate = new Date(
-            this.currentPromotion.endDate
-          );
-          this.form.patchValue(this.currentPromotion);
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   onCancel() {
     this.form.patchValue({
