@@ -74,6 +74,27 @@
   </ng-template>
 </p-table>
 
+<div class="pagination">
+  <span>Tổng số sản phẩm: {{ totalOrders }}</span>
+  <div>
+    <p-dropdown
+      [options]="[5, 10, 15]"
+      (onChange)="changeRowsPerPage($event)"
+      class="dropdown"></p-dropdown>
+    <span
+      >Sản phẩm từ {{ startOrder }} đến {{ startOrder + rowsPerPage - 1 }}</span
+    >
+    <button (click)="onChangePage('previous')" [disabled]="currentPage === 1">
+      <i class="pi pi-angle-left"></i>
+    </button>
+    <button
+      (click)="onChangePage('next')"
+      [disabled]="currentPage === lastPage">
+      <i class="pi pi-angle-right"></i>
+    </button>
+  </div>
+</div>
+
 <p-dialog
   [(visible)]="isShowAcceptOrder"
   [draggable]="false"
